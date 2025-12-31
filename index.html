@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Fohori ❤️</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Pacifico&display=swap');
+* { box-sizing: border-box; margin:0; padding:0; }
+
+body {
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at top, #ff9a9e, #fad0c4);
+    overflow: hidden;
+    flex-direction: column;
+}
+
+/* Envelope */
+.envelope {
+    width: 300px;
+    height: 180px;
+    background: #ff4d6d;
+    border-radius: 15px;
+    position: relative;
+    cursor: pointer;
+    animation: pulse 1.5s infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-weight: 600;
+    font-size: 18px;
+    text-align: center;
+}
+.envelope::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-top: 90px solid #ff6f91;
+}
+@keyframes pulse {0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}
+
+/* Alert Box */
+.alert-box {
+    position: absolute;
+    top: 20px;
+    background: #fff3f3;
+    border: 2px solid #ff4d6d;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    width: 280px;
+    display: none;
+    animation: alertpop 0.6s ease forwards;
+    z-index: 100;
+}
+@keyframes alertpop {
+    0% { transform: scale(0.5); opacity: 0; }
+    60% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1); }
+}
+.alert-box button {margin-top:10px;padding:10px 20px;border:none;background:#ff4d6d;color:white;border-radius:10px;cursor:pointer;font-weight:600;}
+
+/* Sticker */
+.sticker {display:none;text-align:center;animation:float 1.5s ease-in-out infinite;}
+.sticker img {width:150px;margin-bottom:10px;}
+.sticker button {margin:10px;padding:12px 20px;border:none;border-radius:10px;background:#ff6f91;color:white;font-weight:600;cursor:pointer;font-size:16px;}
+
+/* Gifts */
+.gift-section {display:none;text-align:center;}
+.gift-section img {width:220px;border-radius:15px;margin:10px;cursor:pointer;transition:transform 0.3s;}
+.gift-section img:hover { transform: scale(1.05); }
+.gift-section button {margin:10px;padding:14px 22px;border:none;border-radius:12px;background:#ff4d6d;color:white;cursor:pointer;font-size:18px;font-weight:600;}
+
+/* Tulip bouquet */
+.tulip-bouquet {display:none;position:relative;text-align:center;margin-top:20px;}
+.tulip-bouquet .tulip-emoji {font-size:120px; display:block; margin-bottom:20px;}
+.message-circle {position:absolute;top:50%;left:50%;transform-origin:center;}
+.message-circle span {position:absolute;top:-60px;left:-60px;font-weight:600;color:#ff4d6d;}
+
+/* Card */
+.card {display:none;background:white;width:360px;padding:28px;border-radius:30px;text-align:center;box-shadow:0 30px 60px rgba(0,0,0,0.3);animation:float 4s ease-in-out infinite;z-index:5;}
+h1{font-family:'Pacifico',cursive;color:#ff4d6d;}h2{font-weight:400;color:#444;}
+.name{color:#ff4d6d;font-weight:700;} .heart{font-size:52px;animation:beat 1.2s infinite;}
+p{font-size:15px;color:#555;line-height:1.6;}
+.sorry{color:#ff4d6d;font-weight:500;}
+.footer{margin-top:14px;font-size:14px;color:#777;}
+@keyframes beat{0%,100%{transform:scale(1);}50%{transform:scale(1.35);}}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+
+/* Fireworks & Hearts */
+.firework{position:absolute;width:6px;height:6px;border-radius:50%;animation:explode 1s ease-out forwards;}
+@keyframes explode{from{transform:scale(1);opacity:1;}to{transform:scale(8);opacity:0;}}
+.float-heart{position:absolute;color:rgba(255,255,255,0.9);animation:rise 6s linear infinite;}
+@keyframes rise{0%{transform:translateY(100vh) scale(0.6);opacity:1;}100%{transform:translateY(-10vh) scale(1.4);opacity:0;}}
+</style>
+</head>
+<body>
+
+<!-- Envelope -->
+<div class="envelope" onclick="openEnvelope()">
+💌 Open at Midnight
+</div>
+
+<!-- Alert -->
+<div class="alert-box" id="alertBox">
+⏰ Not yet love… open it exactly at midnight! 🎆❤️
+<br>
+<button onclick="closeAlert()">Ok</button>
+</div>
+
+<!-- Sticker -->
+<div class="sticker" id="sticker">
+<img src="sticker.png" alt="Cute sticker">
+<p>Hello my love 💕 Do you want to see a gift?</p>
+<button onclick="chooseGift(true)">Yes please 🎁</button>
+<button onclick="chooseGift(false)">No thanks 😔</button>
+</div>
+
+<!-- Gifts -->
+<div class="gift-section" id="gifts">
+<h3>These are for you 💖</h3>
+<img src="photo1.jpg" onclick="openSlideshow(0)">
+<img src="photo2.jpg" onclick="openSlideshow(1)">
+<img src="photo3.jpg" onclick="openSlideshow(2)">
+<br>
+<button onclick="returnToSticker()">Return 🔙</button>
+<button onclick="openTulip()">Keep watching flowers 🌷</button>
+<button onclick="openSong()">This song reminds me of you 🎶</button>
+<button onclick="showCard()">Final Card 💌</button>
+</div>
+
+<!-- Slideshow Modal -->
+<div class="modal" id="modal">
+<span class="close-btn" onclick="closeSlideshow()">&times;</span>
+<img id="modal-img" src="">
+</div>
+
+<!-- Tulip bouquet -->
+<div class="tulip-bouquet" id="tulip">
+<div class="tulip-emoji">🌷</div>
+<div class="message-circle" id="messages"></div>
+<br>
+<button onclick="returnToGifts()">Return 🔙</button>
+</div>
+
+<!-- Final Card -->
+<div class="card" id="card">
+<h1>Happy Anniversary ❤️</h1>
+<h2>Happy New Year 🎆</h2>
+<p>To my love, <span class="name">Fohori</span> 💕</p>
+<div class="heart">💖</div>
+<p>Timi sanga bitayeko harek pal mero lagi priceless cha. You are my peace, my happiness, my forever.</p>
+<p class="sorry">Ma bata dherai galti bhako xa, I’m truly sorry 🥺❤️ Please forgive me timi bina sabai adhuro cha.</p>
+<p>Yo naya barsa pani, I promise to love you even better ✨</p>
+<div class="footer">Forever yours 💕</div>
+</div>
+
+<!-- Music -->
+<audio id="music" loop>
+<source src="love.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+let slides=["photo1.jpg","photo2.jpg","photo3.jpg"];
+let currentSlide=0;
+
+function openEnvelope(){
+    const now=new Date();
+    if(now.getHours()===0 && now.getMinutes()===0){
+        document.querySelector('.envelope').style.display='none';
+        document.getElementById('sticker').style.display='block';
+        document.getElementById('music').play();
+        startFireworks();
+        startHearts();
+    } else {
+        document.getElementById('alertBox').style.display='block';
+    }
+}
+function closeAlert(){document.getElementById('alertBox').style.display='none';}
+function chooseGift(choice){
+    if(choice){
+        document.getElementById('sticker').style.display='none';
+        document.getElementById('gifts').style.display='block';
+    } else {
+        document.getElementById('sticker').querySelector('p').innerText="Please say yes ❤️ I promise you'll like it 🥺";
+        document.getElementById('sticker').querySelector('button:last-child').innerText="Try again 😢";
+    }
+}
+function returnToSticker(){
+    document.getElementById('gifts').style.display='none';
+    document.getElementById('sticker').style.display='block';
+}
+function returnToGifts(){
+    document.getElementById('tulip').style.display='none';
+    document.getElementById('gifts').style.display='block';
+}
+function openTulip(){
+    document.getElementById('gifts').style.display='none';
+    document.getElementById('tulip').style.display='block';
+    const msgs=["You’re amazing 💕","My love ❤️","Forever yours 💖","So special 🥰"];
+    const circle=document.getElementById('messages');
+    circle.innerHTML='';
+    msgs.forEach((m,i)=>{
+        const s=document.createElement('span');
+        s.innerText=m;
+        s.style.transform=`rotate(${i*90}deg) translate(100px) rotate(-${i*90}deg)`;
+        circle.appendChild(s);
+    });
+    animateMessages();
+}
+function animateMessages(){
+    const circle=document.getElementById('messages');
+    let deg=0;
+    setInterval(()=>{
+        deg+=1;
+        circle.style.transform=`rotate(${deg}deg)`;
+    },50);
+}
+function openSong(){
+    window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ","_blank");
+}
+function showCard(){
+    document.getElementById('gifts').style.display='none';
+    document.getElementById('card').style.display='block';
+}
+// Slideshow
+function openSlideshow(index){
+    currentSlide=index;
+    document.getElementById('modal').style.display='flex';
+    document.getElementById('modal-img').src=slides[currentSlide];
+}
+function closeSlideshow(){document.getElementById('modal').style.display='none';}
+
+// Fireworks & Hearts
+function startFireworks(){setInterval(()=>{
+    const f=document.createElement("div");
+    f.className="firework";
+    f.style.left=Math.random()*100+"vw";
+    f.style.top=Math.random()*100+"vh";
+    f.style.background=`hsl(${Math.random()*360},100%,70%)`;
+    document.body.appendChild(f);
+    setTimeout(()=>f.remove(),1000);
+},500);}
+function startHearts(){setInterval(()=>{
+    const h=document.createElement("div");
+    h.className="float-heart";
+    h.innerHTML="❤️";
+    h.style.left=Math.random()*100+"vw";
+    h.style.fontSize=Math.random()*22+14+"px";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+},400);
+function showCard(){
+    document.getElementById('sticker').style.display='none';
+    document.getElementById('gifts').style.display='none';
+    document.getElementById('tulip').style.display='none';
+    document.getElementById('card').style.display='block';
+    document.getElementById('card').style.zIndex = '999';
+}
+}
+
+</script>
+</body>
+</html>
